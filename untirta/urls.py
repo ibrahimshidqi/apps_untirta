@@ -31,6 +31,7 @@ from ft.views import prodift
 from ft.views import sejarahft
 from pascasarjana.views import prodipascasarjana
 from pascasarjana.views import sejarahpascasarjana
+from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -50,4 +51,5 @@ urlpatterns = [
     path('sejarahft/', sejarahft),
     path('pascasarjana/', prodipascasarjana),
     path('sejarahpascasarjana/', sejarahpascasarjana),
+    path('', views.index),
 ]
