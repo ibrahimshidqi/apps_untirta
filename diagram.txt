@@ -1,0 +1,101 @@
+Table dosen {
+  id int [pk]
+  NIP varchar
+  nama_dosen varchar
+  tanggal_lahir varchar
+  email varchar
+  fakultas varchar
+  prodi varchar
+  alamat_rumah varchar
+  foto varchar
+ }
+
+Table mata_kuliah {
+  Kode_Matkul varchar
+  Nama_Matkul varchar
+  nama_dosen varchar
+  SKS int
+}
+
+Ref: "mata_kuliah"."nama_dosen" < "dosen"."nama_dosen"
+
+Table staff {
+  nama_staff varchar
+  NIP varchar
+  tanggal_lahir varchar
+  email varchar
+  unit varchar
+  alamat_rumah varchar
+  foto varchar
+}
+
+Table mahasiswa {
+  NIM varchar
+  nama_mahasiswa varchar
+  tanggal_lahir varchar
+  email varchar
+  fakultas varchar
+  prodi varchar
+  foto varchar
+}
+
+Ref: "dosen"."prodi" < "mahasiswa"."prodi"
+
+Table KRS {
+  Kode_Matkul varchar
+  Nama_Matkul varchar
+  SKS int
+}
+
+Ref: "mata_kuliah"."Kode_Matkul" < "KRS"."Kode_Matkul"
+
+Ref: "mata_kuliah"."Nama_Matkul" < "KRS"."Nama_Matkul"
+
+Table kelas {
+  kode_kelas varchar
+  ruang varchar
+}
+
+Table jadwal_matkul {
+  SKS int
+  Nama_Matkul varchar
+  Kode_Matkul varchar
+  kode_kelas varchar
+}
+
+Ref: "kelas"."kode_kelas" < "jadwal_matkul"."kode_kelas"
+
+Ref: "KRS"."Nama_Matkul" < "jadwal_matkul"."Nama_Matkul"
+
+Ref: "KRS"."SKS" < "jadwal_matkul"."SKS"
+
+Table transkip_nilai {
+  id int
+  semester varchar
+  Kode_Matkul varchar
+  Nama_Matkul varchar
+  SKS int
+  nilai int
+}
+
+Ref: "mata_kuliah"."Kode_Matkul" < "transkip_nilai"."Kode_Matkul"
+
+Ref: "mata_kuliah"."Nama_Matkul" < "transkip_nilai"."Nama_Matkul"
+
+Ref: "mata_kuliah"."SKS" < "transkip_nilai"."SKS"
+
+Table nama_mahasiswa {
+  nama_depan varchar
+  nama_belakang varchar
+  semester varchar
+}
+
+Ref: "nama_mahasiswa"."semester" < "transkip_nilai"."semester"
+
+Table prodi {
+  id_prodi int [pk]
+  nama_prodi varchar
+  jurusan varchar
+}
+
+Ref: "mahasiswa"."prodi" < "prodi"."nama_prodi"
